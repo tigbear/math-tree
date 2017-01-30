@@ -1,3 +1,4 @@
+#https://genealogy.math.ndsu.nodak.edu/id.php?id=169822
 #python fetch.py --link https://genealogy.math.ndsu.nodak.edu/id.php?id= --id 169822 --outdir /Users/tanya/Data
 
 import sys, getopt, urllib
