@@ -9,12 +9,14 @@ public class Mathematician {
     private String name;
     private String almaMater;
     private int year;
+    private String flag;
 
-    public Mathematician(int id, String name, String almaMater, int year) {
+    public Mathematician(int id, String name, String almaMater, int year, String flag) {
         this.id = id;
         this.name = name;
         this.almaMater = almaMater;
         this.year = year;
+        this.flag = flag;
     }
 
     public int getId() {
@@ -31,5 +33,9 @@ public class Mathematician {
 
     public int getYear() {
         return year;
+    }
+
+    public String getFlag() {
+        return flag;
     }
 }

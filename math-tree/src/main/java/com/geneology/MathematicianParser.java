@@ -22,6 +22,7 @@ public class MathematicianParser {
         String name = "";
         String almaMater = "";
         int year = 0;
+        String flag = "";
         try {
             String text = Files.toString(new File(fileName), Charsets.UTF_8);
             Document doc = Jsoup.parse(text);
@@ -29,10 +30,11 @@ public class MathematicianParser {
             id = getId(doc);
             almaMater = getAlmaMater(doc);
             year = getYear(doc);
+            flag = getFlag(doc);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Mathematician mathematician = new Mathematician(id, name, almaMater, year);
+        Mathematician mathematician = new Mathematician(id, name, almaMater, year, flag);
         return mathematician;
     }
 
@@ -95,5 +97,17 @@ public class MathematicianParser {
             }
         }
         return year;
+    }
+
+    private String getFlag(Document doc) {
+        //<img src="img/flags/UnitedStates.gif" alt="UnitedStates" title="UnitedStates">
+        String flag = "";
+        Elements elements = doc.getElementsByTag("img");
+        for (Element element : elements) {
+            if(element.hasAttr("title")) {
+                flag = element.attr("title");
+            }
+        }
+        return flag;
     }
 }

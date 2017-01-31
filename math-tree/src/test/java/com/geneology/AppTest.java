@@ -17,5 +17,6 @@ public class AppTest {
         assertEquals("John Archibald Wheeler", mathematician.getName());
         assertEquals("The Johns Hopkins University", mathematician.getAlmaMater());
         assertEquals(1933, mathematician.getYear());
+        assertEquals("UnitedStates", mathematician.getFlag());
     }
 }
