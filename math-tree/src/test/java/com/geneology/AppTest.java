@@ -9,7 +9,13 @@ import static org.junit.Assert.assertEquals;
 public class AppTest {
 
     @Test
-    public void testOne() {
-        assertEquals(9000, 9000);
+    public void testJohnWheeler() {
+        String fileName = "src/test/resources/31332.html";
+        MathematicianParser parser = new MathematicianParser();
+        Mathematician mathematician = parser.parse(fileName);
+        assertEquals(31332, mathematician.getId());
+        assertEquals("John Archibald Wheeler", mathematician.getName());
+        assertEquals("The Johns Hopkins University", mathematician.getAlmaMater());
+        assertEquals(1933, mathematician.getYear());
     }
 }
