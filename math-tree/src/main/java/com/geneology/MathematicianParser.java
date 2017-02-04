@@ -2,6 +2,8 @@ package com.geneology;
 
 import org.jsoup.*;
 import java.io.File;
+import java.util.Collections;
+import java.util.LinkedList;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.jsoup.nodes.Document;
@@ -18,6 +20,7 @@ public class MathematicianParser {
     }
 
     public Mathematician parse(String fileName) {
+        Mathematician mathematician = null;
         int id = 0;
         String name = "";
         String almaMater = "";
@@ -31,11 +34,65 @@ public class MathematicianParser {
             almaMater = getAlmaMater(doc);
             year = getYear(doc);
             flag = getFlag(doc);
+            mathematician = new Mathematician(id, name, almaMater, year, flag);
+            LinkedList<Student> students = getStudents(doc);
+            mathematician.setStudents(students);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Mathematician mathematician = new Mathematician(id, name, almaMater, year, flag);
         return mathematician;
+    }
+
+    private LinkedList<Student> getStudents(Document doc) {
+        LinkedList<Student> students = new LinkedList<Student>();
+        Elements children = null;
+        try {
+            Elements table = doc.getElementsByTag("table");
+            children = table.get(0).children().get(0).children();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (children == null) {
+            return students;
+        }
+        for (int index=1; index<children.size(); index++) {
+            String studentName = "";
+            int id = 0;
+            int year = 0;
+            int studentCount = 0;
+            String school = "";
+            Element row = children.get(index);
+            Elements child = row.children();
+            try {
+                Element name = child.get(0);
+                if (name.tag().getName().equals("td")) {
+                    studentName = name.child(0).text();
+                    String idStr = name.child(0).attributes().asList().get(0).getValue();
+                    id = Integer.parseInt(idStr.split("id=")[1]);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                school = child.get(1).text();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                year = Integer.parseInt(child.get(2).text());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                studentCount = Integer.parseInt(child.get(3).text());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            Student student = new Student(id, studentName, school, year, studentCount);
+            students.add(student);
+        }
+        Collections.sort(students);
+        return students;
     }
 
     private String getName(Document doc) {
