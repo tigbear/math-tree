@@ -12,3 +12,6 @@ mvn archetype:generate -DgroupId=com.geneology -DartifactId=math-tree -Darchetyp
 #java jar
 /Users/tanya/Code/math-tree/math-tree/target
 java -cp math-tree-1.0-SNAPSHOT.jar com.geneology.App
+
+#one file in, one file out
+java -Din=/Users/tanya/CrawlResults/31332.html -Dout=/Users/tanya/ProcessedResults/31332.json -Dlog=/Users/tanya/Logs/ -cp target/math-tree-1.0-SNAPSHOT.jar com.geneology.App
