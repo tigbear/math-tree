@@ -48,7 +48,9 @@ public class MathematicianParser {
         Elements children = null;
         try {
             Elements table = doc.getElementsByTag("table");
-            children = table.get(0).children().get(0).children();
+            if (table.size() != 0) {
+                children = table.get(0).children().get(0).children();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -110,8 +112,8 @@ public class MathematicianParser {
         Elements as = doc.getElementsByTag("a");
         try {
             for (Element a : as) {
-                if (a.text().equals("here")) {
-                    //<a href="id.php?id=31332&amp;fChrono=1">here</a>
+                if (a.text().equals("update form")) {
+                   //href="submit-data.php?id=31332&amp;edit=0">update form</a>
                     String href = a.attr("href");
                     //id.php?id=31332&fChrono=1
                     String[] split = href.split("id=");

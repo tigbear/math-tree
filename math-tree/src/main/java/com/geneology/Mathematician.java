@@ -9,15 +9,15 @@ public class Mathematician {
 
     private int id;
     private String name;
-    private String almaMater;
+    private String school;
     private int year;
     private String flag;
     private LinkedList<Student> students;
 
-    public Mathematician(int id, String name, String almaMater, int year, String flag) {
+    public Mathematician(int id, String name, String school, int year, String flag) {
         this.id = id;
         this.name = name;
-        this.almaMater = almaMater;
+        this.school = school;
         this.year = year;
         this.flag = flag;
     }
@@ -34,8 +34,8 @@ public class Mathematician {
         return name;
     }
 
-    public String getAlmaMater() {
-        return almaMater;
+    public String getSchool() {
+        return school;
     }
 
     public int getYear() {
